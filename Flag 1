@@ -1,1 +1,2 @@
-
+Le site présente une mauvaise configuration permettant l’accès à un répertoire non protégé et normalement destiné à rester invisible. En effet, un dossier nommé .hidden/, situé directement à la racine du serveur web, est accessible via l’URL suivante :
+http://192.168.1.87/.hidden/
