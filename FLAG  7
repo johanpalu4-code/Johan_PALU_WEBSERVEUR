@@ -1,0 +1,1 @@
+le paramètre src n’est pas correctement filtré, ce qui rend possible l’injection de code malveillant côté client.
