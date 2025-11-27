@@ -1,0 +1,24 @@
+En accédant à l’URL suivante :
+http://192.168.1.87/index.php?page=membre
+
+On découvre un champ permettant de rechercher un utilisateur en fonction de son identifiant (ID). Après plusieurs essais simples (1, 2, 3…), aucun résultat pertinent n’apparaît.
+
+En revanche, l’ID 5 renvoie les informations suivantes :
+Prénom : Flag
+Nom : GetThe
+
+Une tentative d’injection SQL basique est ensuite réalisée 
+
+Le serveur répond alors :
+« Les instructions SELECT utilisées comportent un nombre différent de colonnes. »
+
+Ce message confirme que l’injection est bien prise en compte. Il faut donc déterminer le nombre exact de colonnes attendues.
+
+Une fois identifié, il devient possible de lister les tables et colonnes de la base de données en utilisant 
+
+Cette requête permet d’afficher les données de l’ensemble des utilisateurs. Pour le dernier utilisateur, on obtient un hash
+
+Ce hash correspond à un MD5.
+Il est ensuite demandé de déchiffrer le mot de passe et de réduire tous les caractères, avec l’indication « SHA256 et c’est bon ».
+
+Une fois le hash décodé, il peut être réencodé en SHA256 comme demandé.
