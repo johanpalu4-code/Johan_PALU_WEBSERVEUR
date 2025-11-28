@@ -1,1 +1,14 @@
 
+Une mauvaise gestion des paramètres d’inclusion de fichiers peut être exploitée afin de consulter des fichiers internes du serveur. Le paramètre ?page= est vulnérable, car il permet d’inclure des fichiers sans aucun filtrage ni restriction. Cette faille conduit à une vulnérabilité de type LFI (Local File Inclusion).
+
+Par défaut, l’accès à la page d’accueil se fait via l’URL :
+
+http://192.168.1.87/?page=home
+
+
+En modifiant la valeur du paramètre et en utilisant des séquences de remontée de répertoires, il est possible d’inclure des fichiers sensibles du système. Par exemple :
+
+http://192.168.1.87/?page=../../../../etc/passwd
+
+
+Cette requête affiche le contenu du fichier /etc/passwd, prouvant la présence d’une vulnérabilité LFI exploitable.
