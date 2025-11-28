@@ -1,1 +1,7 @@
 
+La page redirect accepte un paramètre transmis dans l’URL, lequel est directement utilisé dans une redirection sans aucun contrôle ni validation préalable.
+
+Cette absence de filtrage permet de manipuler la redirection afin de charger et afficher des ressources internes ou externes au serveur.
+
+
+En exploitant cette redirection pour pointer vers une ressource interne, il est possible d’accéder à un contenu sensible, ce qui permet de récupérer le flag.
