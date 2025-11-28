@@ -1,1 +1,10 @@
+si on se rend sur cette page : 
+http://192.168.1.87/?page=signin
+L’analyse de la requête envoyée lors du clic sur le bouton “Login” montre que le site utilise une méthode GET pour transmettre les identifiants :?page=signin&username=ADMIN&password=xxxx&Login=Connexion#
+Ainsi, les paramètres sont envoyés directement dans l’URL, ce qui rend une attaque par bruteforce particulièrement simple à mettre en œuvre.
 
+Pour réaliser l’attaque, un fichier de dictionnaire nommé liste de mots.txt est créé, contenant différentes combinaisons de mots de passe.
+
+Un script Python de bruteforce (brute.py) est alors développé. Celui-ci effectue des requêtes répétées en envoyant les valeurs username et password via la méthode GET, et non POST.
+
+Le script est ensuite exécuté avec la commande suivante : python3 brute2.py
