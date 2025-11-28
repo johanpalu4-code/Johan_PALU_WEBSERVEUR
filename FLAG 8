@@ -1,0 +1,7 @@
+Aucun champ destiné à saisir une adresse email n’est affiché dans le formulaire. Cependant, l’analyse du formulaire de récupération de mot de passe révèle la présence d’un champ caché nommé mail.
+Pour l’identifier, il suffit de récupérer le code source complet de la page : curl -s "http://192.168.1.87/?page=recover"
+
+Même si l’on tente d’envoyer une adresse email différente, le serveur ignore la valeur fournie par l’utilisateur et continue d’utiliser celle présente dans le champ caché.
+
+Afin de contourner ce comportement, nous envoyons manuellement une requête POST en injectant notre propre valeur dans le paramètre mail : curl -s -X POST "http://192.168.1.87/index.php?page=recover" \
+-d "mail=test@test.com&Submit=Submit" | grep -i flag
