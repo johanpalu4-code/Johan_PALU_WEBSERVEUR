@@ -1,1 +1,14 @@
 
+En accédant à la page /survey, j’ai constaté la présence d’un tableau regroupant plusieurs sujets, chacun accompagné d’un bouton permettant de leur attribuer une note.
+
+L’inspection de l’interface montre que le simple clic sur une note entraîne immédiatement l’envoi du formulaire. Cela laisse supposer que la fonction JavaScript this.form.submit() est déclenchée automatiquement, ce qui confirme que la note est envoyée au serveur via une requête POST.
+
+L’analyse du code HTML révèle que le formulaire POST transmet deux paramètres :
+
+sujet : identifiant du sujet
+
+valeur : note attribuée
+
+Aucun contrôle côté serveur ne semble restreindre la valeur envoyée. Il est donc possible de soumettre une note anormale, comme 9999.
+
+En reproduisant la requête POST avec curl et en envoyant une valeur hors limite (9999), le serveur a répondu en renvoyant le flag.
